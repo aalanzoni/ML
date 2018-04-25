@@ -5,6 +5,7 @@
  */
 
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -23,13 +24,23 @@ public class Main {
 
         for (final Site site: categories) {
             System.out.println(site);
-        }*/ 
+        }
         
         //Site{id='MLA1168', name='Música, Películas y Series'}
         final List<Site> childrens = SiteHandler.getInstance().getAllMeliChildrenForCategories("MLA1168");
         for (final Site chield: childrens) {
             System.out.println(chield);
-        } 
+        }*/ 
+        CategoryPredict category = SiteHandler.getInstance().getPredictCategories("tablet samsung galaxy tab 4");
+
+        System.err.println("Catogoria: "+ category.getName()); 
+        
+        List<CategoryPred> cat = category.getPath_from_root();
+        
+        for (Iterator<CategoryPred> ca = cat.iterator(); ca.hasNext();) {
+            CategoryPred next = ca.next();
+            System.err.println("camino: " + next.getName());
+        }
     }
 
 }

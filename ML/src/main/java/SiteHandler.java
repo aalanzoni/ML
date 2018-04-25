@@ -9,10 +9,12 @@ import com.google.gson.Gson;
 import com.google.gson.internal.StringMap;
 import com.mercadolibre.sdk.Meli;
 import com.mercadolibre.sdk.MeliException;
+import com.ning.http.client.FluentStringsMap;
 import com.ning.http.client.Response;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import junit.framework.Assert;
 
 /**
  *
@@ -113,6 +115,45 @@ public class SiteHandler {
              System.out.println("Error " + e.getMessage());
          }
          return newSites;
+     }
+     
+     public CategoryPredict getPredictCategories(String product) {                  
+         CategoryPredict category = new CategoryPredict();
+         try {             
+             String path = new String("");
+             
+             /*
+             final Response response2 = meli.get("/sites/MLA/search?category=MLA5782");
+             Object publi2 = gson.fromJson(response2.getResponseBody(), Object.class);
+             System.out.println(publi2);*/
+             
+             //path = path.replaceAll(" ", "%20");
+             path = "/sites/MLA/category_predictor/predict";//?title=Tablet%20SAMSUNG%20GALAXY%20TAB%203";
+             
+             System.out.println("Path: " + path);
+             
+             FluentStringsMap params = new FluentStringsMap();
+             params.add("title", product);             
+             final Response response = meli.get(path, params);
+             System.err.println("uri: "+ response.getUri());
+             final Gson gson = new Gson();
+             
+             int error = response.getStatusCode();
+             if (error == 400 || error == 404){
+                 System.err.println("uri: "+ response.getUri());
+                 System.err.println("Error");
+                 return null;
+             }
+             category = gson.fromJson(response.getResponseBody(), CategoryPredict.class);             
+             
+         } catch (MeliException ex) {
+             //Logger error en la respuesta
+             System.out.println("Error " + ex.getMessage());
+         } catch (IOException e) {
+             //Logger error en la transformacion usando de gson.
+             System.out.println("Error " + e.getMessage());
+         }         
+         return category;
      }
      
      
