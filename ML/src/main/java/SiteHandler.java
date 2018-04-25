@@ -121,31 +121,27 @@ public class SiteHandler {
          CategoryPredict category = new CategoryPredict();
          try {             
              String path = new String("");
-             
-             /*
-             final Response response2 = meli.get("/sites/MLA/search?category=MLA5782");
-             Object publi2 = gson.fromJson(response2.getResponseBody(), Object.class);
-             System.out.println(publi2);*/
-             
-             //path = path.replaceAll(" ", "%20");
-             path = "/sites/MLA/category_predictor/predict";//?title=Tablet%20SAMSUNG%20GALAXY%20TAB%203";
+
+             path = "/sites/MLA/category_predictor/predict";
              
              System.out.println("Path: " + path);
              
              FluentStringsMap params = new FluentStringsMap();
-             params.add("title", product);             
+             params.add("title", product.toLowerCase());
              final Response response = meli.get(path, params);
              System.err.println("uri: "+ response.getUri());
              final Gson gson = new Gson();
              
-             int error = response.getStatusCode();
-             if (error == 400 || error == 404){
+             int status_code = response.getStatusCode();
+             
+             if (status_code == 200){
+                 category = gson.fromJson(response.getResponseBody(), CategoryPredict.class);
+             }
+             else{
                  System.err.println("uri: "+ response.getUri());
                  System.err.println("Error");
                  return null;
              }
-             category = gson.fromJson(response.getResponseBody(), CategoryPredict.class);             
-             
          } catch (MeliException ex) {
              //Logger error en la respuesta
              System.out.println("Error " + ex.getMessage());

@@ -33,7 +33,7 @@ public class Main {
         }*/ 
         CategoryPredict category = SiteHandler.getInstance().getPredictCategories("tablet samsung galaxy tab 4");
 
-        System.err.println("Catogoria: "+ category.getName()); 
+        System.err.println("Catogoria: "+ category.getName());
         
         List<CategoryPred> cat = category.getPath_from_root();
         
