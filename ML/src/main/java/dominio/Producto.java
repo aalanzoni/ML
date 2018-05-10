@@ -8,6 +8,7 @@ package dominio;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table; 
 
@@ -20,7 +21,12 @@ import javax.persistence.Table;
 @Table(name="Producto")
 public class Producto implements Serializable  {
     @Id
-    @Column(name="id_producto")     
+    @Column(name="id_producto")
+    @GeneratedValue( generator = "generador_propietario_hibernate_increment" )
+    @org.hibernate.annotations.GenericGenerator(
+        name = "generador_propietario_hibernate_increment",
+        strategy = "increment" 
+    ) 
     private Long id;
     
     @Column(name="sucursal_producto")
@@ -62,8 +68,11 @@ public class Producto implements Serializable  {
     @Column(name="moneda_producto")
     private String moneda;
     
-    @Column(name="categoria_pub_producto")
-    private int categoria_pub;
+    @Column(name="codcate_pub_producto")
+    private String codigo_categoria_pub;
+    
+    @Column(name="nombcate_pub_producto")
+    private String nombre_categoria_pub;
     
     @Column(name="stock_min_producto")
     private int stock_min;
@@ -90,8 +99,7 @@ public class Producto implements Serializable  {
         super();
     }
 
-    public Producto(Long id, int sucursal, String codigo, String nombre) {
-        this.id = id;
+    public Producto(int sucursal, String codigo, String nombre) {
         this.sucursal = sucursal;
         this.codigo = codigo;
         this.nombre = nombre;
@@ -209,13 +217,23 @@ public class Producto implements Serializable  {
         this.moneda = moneda;
     }
 
-    public int getCategoria_pub() {
-        return categoria_pub;
+    public String getCodigo_categoria_pub() {
+        return codigo_categoria_pub;
     }
 
-    public void setCategoria_pub(int categoria_pub) {
-        this.categoria_pub = categoria_pub;
+    public void setCodigo_categoria_pub(String codigo_categoria_pub) {
+        this.codigo_categoria_pub = codigo_categoria_pub;
     }
+
+    public String getNombre_categoria_pub() {
+        return nombre_categoria_pub;
+    }
+
+    public void setNombre_categoria_pub(String nombre_categoria_pub) {
+        this.nombre_categoria_pub = nombre_categoria_pub;
+    }
+    
+    
 
     public int getStock_min() {
         return stock_min;

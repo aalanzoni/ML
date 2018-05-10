@@ -24,31 +24,20 @@ public class TestHibernate {
 	public static void main(String[] args) {
             System.out.println(".......ARRANCAAAA.......\n");
             try {
-                SessionFactory sessionFactory;
+                Session session = SingletonDB.getSession();
 
-                Configuration configuration = new Configuration();
-                configuration.configure();
-                ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
-                sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-
-                
-                Producto producto = new Producto(new Long("1"),1,"AL1","un nombre");
-                System.out.println("1");
-                
-                Session session=sessionFactory.openSession();
-                System.out.println("2");
+                Producto producto = new Producto(1,"Alicante 6","no nombre");
                 
                 session.beginTransaction();
-                System.out.println("3");
                 session.save(producto);
-                System.out.println("4");
                 session.getTransaction().commit();
-                System.out.println("5");
-        
+                
+                producto = new Producto(1, "lalala", "dos");
+                session.beginTransaction();
+                session.save(producto);
+                session.getTransaction().commit();
+                
                 session.close();
-                System.out.println("6");
-                sessionFactory.close();
-                System.out.println("7");
 
             } catch(Exception sqlException) {
                 System.err.println("Error: ");

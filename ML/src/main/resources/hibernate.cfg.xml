@@ -10,7 +10,9 @@
     <property name="connection.password">hs</property>    
     <property name="hibernate.show_sql">true</property>
     <property name="dialect">org.hibernate.dialect.SQLServerDialect</property>
-    <!--<property name="hbm2ddl.auto">create</property>-->
+    
+    <!--OJO con la propiedad hbm2ddl.auto que actualiza la tabla -->
+    <property name="hbm2ddl.auto">delete</property>
 
     <mapping class="dominio.Producto" /> 
 
