@@ -5,8 +5,11 @@
  */
 
 
+import mapeo.CategoryPred;
+import mapeo.CategoryPredict;
 import java.util.Iterator;
 import java.util.List;
+import configuracion.Configuracion;
 
 /**
  *
@@ -14,6 +17,8 @@ import java.util.List;
  */
 public class Main {
     public static void main(String[] args) throws Exception {
+        Configuracion.setConf("./config.ini");
+        
         /*final List<Site> sites = SiteHandler.getInstance().getAllMeliSite();
 
         for (final Site site: sites) {
@@ -31,7 +36,7 @@ public class Main {
         for (final Site chield: childrens) {
             System.out.println(chield);
         }*/ 
-        CategoryPredict category = SiteHandler.getInstance().getPredictCategories("tablet samsung galaxy tab 4");
+        CategoryPredict category = SearchHandler.getInstance().getPredictCategories("tablet samsung galaxy tab 4");
 
         System.err.println("Catogoria: "+ category.getName());
         
@@ -39,8 +44,9 @@ public class Main {
         
         for (Iterator<CategoryPred> ca = cat.iterator(); ca.hasNext();) {
             CategoryPred next = ca.next();
-            System.err.println("camino: " + next.getName());
+            System.err.println(next.getId() + " " + next.getName());
         }
+        
+        System.exit(0);
     }
-
 }

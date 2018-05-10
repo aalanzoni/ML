@@ -5,6 +5,8 @@
  */
 
 
+import mapeo.CategoryPredict;
+import mapeo.Site;
 import com.google.gson.Gson;
 import com.google.gson.internal.StringMap;
 import com.mercadolibre.sdk.Meli;
@@ -14,13 +16,11 @@ import com.ning.http.client.Response;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import junit.framework.Assert;
-
 /**
  *
  * @author Andres Lanzoni
  */
-public class SiteHandler {
+public class SearchHandler {
     //Nombre de los campos que vamos a obtener informacion
      private static final String ID_KEY = "id";
      private static final String NAME_KEY = "name";
@@ -29,15 +29,17 @@ public class SiteHandler {
      //Creamos una unica instancia de Meli.
      private final Meli meli;
 
-     private static final SiteHandler instance = new SiteHandler();
+     private static final SearchHandler instance = new SearchHandler();
 
-     private SiteHandler() {
+     private SearchHandler() {         
          //Aca creamos el objecto Meli con la información de su aplicación.
-         meli = new Meli(new Long("4532553168555750"), 
-                  "CaVD3Vt6MEYMPcFH81TYxxm3ZPTzEjBK");
+         meli = new Meli(configuracion.Configuracion.getApp_id(), 
+                         configuracion.Configuracion.getApp_url());
+//         meli = new Meli(new Long("4532553168555750"), 
+//                  "CaVD3Vt6MEYMPcFH81TYxxm3ZPTzEjBK");
      }
 
-     public static SiteHandler getInstance() {
+     public static SearchHandler getInstance() {
          return instance;
      }
 

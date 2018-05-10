@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="dominio.Producto" table="producto">
+        <id name="id" column="id_producto">
+            <generator class="native_producto"/>
+        </id> 
+        <property name= "sucursal_producto"/>
+        <property name= "codigo_producto"/>
+        <property name= "nombre_producto"/>
+        <property name= "barra_producto"/>
+        <property name= "nombreML_producto"/>
+        <property name= "descripcion_corta_producto"/>
+        <property name= "descripcion_larga_producto"/>
+        <property name= "estado_producto"/>
+        <property name= "precio_producto"/>
+        <property name= "poriva_producto"/>
+        <property name= "precio_con_iva_producto"/>
+        <property name= "precio_promocion_producto"/>
+        <property name= "moneda_producto"/>
+        <property name= "categoria_pub_producto"/>
+        <property name= "stock_min_producto"/>
+        <property name= "stock_max_producto"/>
+        <property name= "stock_real_producto"/>
+        <property name= "stock_negativo_producto"/>
+        <property name= "color_producto"/>
+        <property name= "marca_producto"/>
+        <property name= "modelo_producto"/>
+    </class>
+</hibernate-mapping>
