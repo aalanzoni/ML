@@ -4,45 +4,104 @@
  * and open the template in the editor.
  */
 package dominio;
+
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table; 
+
 /**
  *
  * @author Andres Lanzoni
  */
 
-
-public class Producto{
+@Entity
+@Table(name="Producto")
+public class Producto implements Serializable  {
+    @Id
+    @Column(name="id_producto")     
     private Long id;
+    
+    @Column(name="sucursal_producto")
     private int sucursal;
+    
+    @Column(name="codigo_producto")
     private String codigo;
+    
+    @Column(name="nombre_producto")
     private String nombre;
+    
+    @Column(name="barra_producto")
     private String barra;
+    
+    @Column(name="nombreML_producto")
     private String nombreML;
-    private String descripcion_corta;
+    
+    @Column(name="descripcion_corta_producto")
+    private String descripcion_corta;    
+    
+    @Column(name="descripcion_larga_producto")
     private String descripcion_larga;
+    
+    @Column(name="estado_producto")
     private int estado;//1 = OK
+    
+    @Column(name="precio_producto")
     private float precio;
+    
+    @Column(name="porciva_producto")
     private float porciva;
+    
+    @Column(name="precio_con_iva_producto")
     private float precio_con_iva;
+    
+    @Column(name="precio_promocion_producto")
     private float precio_promocion;
+    
+    @Column(name="moneda_producto")
     private String moneda;
+    
+    @Column(name="categoria_pub_producto")
     private int categoria_pub;
+    
+    @Column(name="stock_min_producto")
     private int stock_min;
+    
+    @Column(name="stock_max_producto")
     private int stock_max;
+    
+    @Column(name="stock_real_producto")
     private int stock_real;
+    
+    @Column(name="stock_negativo_producto")
     private int stock_negativo;
+    
+    @Column(name="color_producto")
     private String color;
+    
+    @Column(name="marca_producto")
     private String marca;
+    
+    @Column(name="modelo_producto")
     private String modelo;
     
     public Producto(){
         super();
     }
 
+    public Producto(Long id, int sucursal, String codigo, String nombre) {
+        this.id = id;
+        this.sucursal = sucursal;
+        this.codigo = codigo;
+        this.nombre = nombre;
+    }
+
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    private void setId(Long id) {
         this.id = id;
     }
 
